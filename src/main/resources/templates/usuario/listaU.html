@@ -1,0 +1,31 @@
+<!-- departamento/listaD.html -->
+<div th:fragment="contenido">
+    <h2 class="text-center">Usuarios</h2>
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark text-center">
+            <tr>
+                <th>ID</th>
+				<th>Nombre</th>
+				<th>Apellido</th>
+				<th>Email</th>
+				<th>Password</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="u : ${usuarioU}">
+                <td th:text="${u.id}"></td>
+                <td th:text="${u.nombre}"></td>
+                <td th:text="${u.apellido}"></td>
+                <td th:text="${u.email}"></td>
+                <td th:text="${u.password}"></td>
+                <td class="text-center">
+				    <a th:href="@{/registro/eliminar/{id}(id=${u.id})}" class="btn btn-danger btn-sm"
+				       onclick="return confirm('¿Seguro?')">
+				        <i class="fas fa-trash"></i>
+				    </a>
+				</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

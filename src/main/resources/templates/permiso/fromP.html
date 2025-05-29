@@ -1,0 +1,75 @@
+<div th:fragment="contenido">
+    <h2 class="text-center">From Permiso</h2>
+
+    <form th:action="@{/per/guardar}" th:object="${permiso}" method="post"
+          class="p-4 border rounded bg-white shadow-sm col-md-8 mx-auto">
+        
+        <!-- ID solo visible en modo edición -->
+        <div th:if="${permiso.id != null}" class="mb-3">
+            <label class="form-label">ID</label>
+            <input type="text" th:field="*{id}" class="form-control" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Empleado</label>
+            <select class="form-control" th:field="*{empleado.id}">
+                <option value="">-- Selecciona un empleado --</option>
+                <option th:each="p : ${empleados}"
+                        th:value="${p.id}"
+                        th:text="${p.nombrecompleto}"></option>
+            </select>
+            <small class="text-danger" th:if="${#fields.hasErrors('empleado')}" th:errors="*{empleado}"></small>
+        </div>
+
+        <div class="mb-3">
+		    <label class="form-label">Fecha Solicitud</label>
+		    <input type="date" th:field="*{fechasolisitud}" class="form-control" required />
+		    <div th:if="${#fields.hasErrors('fechasolisitud')}" th:errors="*{fechasolisitud}" class="text-danger"></div>
+		</div>
+
+		<div class="mb-3">
+		    <label class="form-label">Fecha Inicio</label>
+		    <input type="date" th:field="*{fechainicio}" class="form-control" required />
+		    <div th:if="${#fields.hasErrors('fechainicio')}" th:errors="*{fechainicio}" class="text-danger"></div>
+		</div>
+
+		<div class="mb-3">
+		    <label class="form-label">Fecha Fin</label>
+		    <input type="date" th:field="*{fechafin}" class="form-control" required />
+		    <div th:if="${#fields.hasErrors('fechafin')}" th:errors="*{fechafin}" class="text-danger"></div>
+		</div>
+
+		<div class="mb-3">
+            <label class="form-label">Justificacion</label>
+            <input type="text" th:field="*{justificacion}" class="form-control" required />
+            <div th:if="${#fields.hasErrors('justificacion')}" th:errors="*{justificacion}" class="text-danger"></div>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">Tipo</label>
+            <select class="form-control" th:field="*{tipo.id}">
+                <option value="">-- Selecciona un Tipo --</option>
+                <option th:each="p : ${tipos}"
+                        th:value="${p.id}"
+                        th:text="${p.nombre}"></option>
+            </select>
+            <small class="text-danger" th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}"></small>
+        </div>
+        
+        <div class="mb-3">
+            <label class="form-label">Estado</label>
+            <select class="form-control" th:field="*{estado.id}">
+                <option value="">-- Selecciona un estado --</option>
+                <option th:each="p : ${estados}"
+                        th:value="${p.id}"
+                        th:text="${p.nombre}"></option>
+            </select>
+            <small class="text-danger" th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}"></small>
+        </div>
+
+        <div class="text-end">
+            <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
+            <a th:href="@{/per/inicio}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>

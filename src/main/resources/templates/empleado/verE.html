@@ -1,0 +1,40 @@
+<div th:fragment="contenido">
+    <h2 class="text-center">Detalles del Empleado</h2>
+
+    <div class="card col-md-8 mx-auto p-4 shadow-sm">
+        <div class="mb-3">
+            <strong>ID:</strong> <span th:text="${empleado.id}"></span>
+        </div>
+        <div class="mb-3">
+            <strong>Nombre completo:</strong> <span th:text="${empleado.nombrecompleto}"></span>
+        </div>
+        <div class="mb-3">
+            <strong>Puesto:</strong>
+            <span th:text="${empleado.puesto != null} ? ${empleado.puesto.nombrepuesto} : 'Sin Puesto'"></span>
+        </div>
+        <div class="mb-3">
+            <strong>Departamento:</strong>
+            <span th:text="${empleado.departamento != null} ? ${empleado.departamento.nombre_dep} : 'Sin Departamento'"></span>
+        </div>
+        <div class="mb-3">
+            <strong>Dirección:</strong> <span th:text="${empleado.direccion}"></span>
+        </div>
+        <div class="mb-3">
+            <strong>Fecha de Contrato:</strong>
+            <span th:text="${#dates.format(empleado.fechacontrato, 'yyyy-MM-dd')}"></span>
+        </div>
+        <div class="mb-3">
+            <strong>Teléfono:</strong> <span th:text="${empleado.telefono}"></span>
+        </div>
+        <div class="mb-3">
+            <strong>Email:</strong> <span th:text="${empleado.email}"></span>
+        </div>
+        <div class="mb-3">
+            <strong>Género:</strong> <span th:text="${empleado.genero}"></span>
+        </div>
+
+        <div class="text-end">
+            <a th:href="@{/emp/inicio}" class="btn btn-secondary">Volver</a>
+        </div>
+    </div>
+</div>

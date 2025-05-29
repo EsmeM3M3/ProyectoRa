@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f2e6e3;
+        }
+        .sidebar {
+            height: 100vh;
+            position: fixed;
+            width: 250px;
+            background-color: #1a1e23;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-y: auto;
+        }
+        .sidebar .nav-link { color: white; text-decoration: none; padding: 0.75rem; border-radius: 0.25rem; display: flex; align-items: center; gap: 0.75rem; }
+        .sidebar .nav-link:hover { background-color: #343a40; }
+        .sidebar .nav-link.active { background-color: #4c5e70; }
+        .main-content { margin-left: 250px; padding: 2rem; flex-grow: 1; background-color: #f2e6e3; color: #1a1e23; }
+        .sidebar-buttons {
+            padding-top: 1rem;
+            border-top: 1px solid #343a40;
+        }
+        .sidebar-buttons a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            border-radius: 0.25rem;
+            margin-bottom: 0.5rem;
+            text-align: center;
+            border: 1px solid #4c5e70;
+        }
+        .sidebar-buttons a:hover {
+            background-color: #4c5e70;
+            border-color: #343a40;
+        }
+    </style>
+</head>
+<body>
+
+<div class="sidebar">
+    <div>
+        <h4 class="text-center"><i class="fas fa-chart-line"></i> TimeApp</h4>
+        <ul class="nav nav-pills flex-column">
+            <li><a th:href="@{/home}" class="nav-link"><i class="fas fa-home"></i> Inicio</a></li>
+            <li><a th:href="@{/depa/inicio}" class="nav-link"><i class="fas fa-building"></i>Departamentos</a></li>
+            <li><a th:href="@{/puesto/inicio}" class="nav-link"><i class="fas fa-briefcase"></i>Puestos</a></li>
+            <li><a th:href="@{/emp/inicio}" class="nav-link"><i class="fas fa-user"></i>Empleados</a></li>
+            <li><a th:href="@{/hora/inicio}" class="nav-link"><i class="fas fa-clock"></i>Horarios</a></li>
+            <li><a th:href="@{/estado/inicio}" class="nav-link"><i class="fas fa-flag"></i>Estado Permiso</a></li>
+            <li><a th:href="@{/tipo/inicio}" class="nav-link"><i class="fas fa-tags"></i>Tipo Permiso</a></li>
+            <li><a th:href="@{/per/inicio}" class="nav-link"><i class="fas fa-envelope-open-text"></i>Permisos</a></li>
+            <li><a th:href="@{/asis/inicio}" class="nav-link"><i class="fas fa-check-circle"></i>Asistencias</a></li>
+            <li><a th:href="@{/tarde/inicio}" class="nav-link"><i class="fas fa-stopwatch"></i>Retardos</a></li>
+            <li><a th:href="@{/registro/inicio}" class="nav-link"><i class="fas fa-user-circle"></i>Usuarios</a></li>
+            <li><a th:href="@{/rol/inicio}" class="nav-link"><i class="fas fa-users-cog"></i>Perfiles</a></li>
+            <!-- Más opciones... -->
+        </ul>
+    </div>
+    <div class="sidebar-buttons">
+        <a href="/logout">Salir</a>
+        <a href="/registro">Registrarse</a>
+        <a href="/login">Iniciar Sesión</a>
+    </div>
+</div>
+
+<!-- Aquí se carga el contenido dinámico -->
+<!-- en layout.html -->
+<div class="main-content" th:include="${contenido} :: contenido"></div>
+
+</body>
+</html>

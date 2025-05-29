@@ -1,0 +1,24 @@
+<div th:fragment="contenido">
+    <h2 class="text-center">From Perfil</h2>
+
+    <form th:action="@{/rol/guardar}" th:object="${rol}" method="post"
+          class="p-4 border rounded bg-white shadow-sm col-md-8 mx-auto">
+        
+        <!-- ID solo visible en modo edición -->
+        <div th:if="${rol.id != null}" class="mb-3">
+            <label class="form-label">ID</label>
+            <input type="text" th:field="*{id}" class="form-control" readonly />
+        </div>
+
+		<div class="mb-3">
+            <label class="form-label">Nombre</label>
+            <input type="text" th:field="*{nombre}" class="form-control" required />
+            <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="text-danger"></div>
+        </div>
+        
+        <div class="text-end">
+            <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
+            <a th:href="@{/rol/inicio}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>

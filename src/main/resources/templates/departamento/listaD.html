@@ -1,0 +1,28 @@
+<!-- departamento/listaD.html -->
+<div th:fragment="contenido">
+    <h2 class="text-center">Departamentos</h2>
+    <div class="text-end mb-3">
+        <a th:href="@{/depa/crear}" class="btn btn-primary"><i class="fas fa-plus"></i> Nuevo Departamento</a>
+    </div>
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark text-center">
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="dep : ${departamentoD}">
+                <td th:text="${dep.id}"></td>
+                <td th:text="${dep.nombre_dep}"></td>
+                <td th:text="${dep.descripcion}"></td>
+                <td class="text-center">
+                    <a th:href="@{/depa/editar/{id}(id=${dep.id})}" class="btn btn-warning btn-sm"><i class="fas fa-edit"></i></a>
+                    <a th:href="@{/depa/eliminar/{id}(id=${dep.id})}" class="btn btn-danger btn-sm" onclick="return confirm('¿Seguro?')"><i class="fas fa-trash"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

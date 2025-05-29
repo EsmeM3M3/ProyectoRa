@@ -1,0 +1,29 @@
+<!-- departamento/fromD.html -->
+<div th:fragment="contenido">
+    <h2 class="text-center">Form Puesto</h2>
+
+    <form th:action="@{/puesto/guardar}" th:object="${puesto}" method="post"
+          class="p-4 border rounded bg-white shadow-sm col-md-6 mx-auto">
+        <!-- Mostrar ID solo si existe (editar) -->
+		<div th:if="${puesto.id != null}" class="mb-3">
+		    <label class="form-label">ID</label>
+		    <input type="text" th:field="*{id}" class="form-control" readonly />
+		</div>
+        <div class="mb-3">
+            <label for="nombrepuesto" class="form-label">Nombre del Puesto</label>
+            <input type="text" th:field="*{nombrepuesto}" class="form-control" required />
+            <div th:if="${#fields.hasErrors('nombrepuesto')}" th:errors="*{nombrepuesto}" class="text-danger"></div>
+        </div>
+
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripción</label>
+            <textarea th:field="*{descripcion}" class="form-control" rows="3" required></textarea>
+            <div th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}" class="text-danger"></div>
+        </div>
+
+        <div class="text-end">
+            <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
+            <a th:href="@{/puesto/inicio}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,81 @@
+<div th:fragment="contenido">
+    <h2 class="text-center">Formulario Empleado</h2>
+
+    <form th:action="@{/emp/guardar}" th:object="${empleado}" method="post"
+          class="p-4 border rounded bg-white shadow-sm col-md-8 mx-auto">
+        
+        <!-- ID solo visible en modo edición -->
+        <div th:if="${empleado.id != null}" class="mb-3">
+            <label class="form-label">ID</label>
+            <input type="text" th:field="*{id}" class="form-control" readonly />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Nombre Completo</label>
+            <input type="text" th:field="*{nombrecompleto}" class="form-control" required />
+            <div th:if="${#fields.hasErrors('nombrecompleto')}" th:errors="*{nombrecompleto}" class="text-danger"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Puesto</label>
+            <select class="form-control" th:field="*{puesto.id}">
+                <option value="">-- Selecciona un puesto --</option>
+                <option th:each="p : ${puestos}"
+                        th:value="${p.id}"
+                        th:text="${p.nombrepuesto}"></option>
+            </select>
+            <small class="text-danger" th:if="${#fields.hasErrors('puesto')}" th:errors="*{puesto}"></small>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Departamento</label>
+            <select class="form-control" th:field="*{departamento.id}">
+                <option value="">-- Selecciona un departamento --</option>
+                <option th:each="d : ${departamentos}"
+                        th:value="${d.id}"
+                        th:text="${d.nombre_dep}"></option>
+            </select>
+            <small class="text-danger" th:if="${#fields.hasErrors('departamento')}" th:errors="*{departamento}"></small>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Dirección</label>
+            <input type="text" th:field="*{direccion}" class="form-control" required />
+            <div th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}" class="text-danger"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Fecha de Contrato</label>
+            <input type="date" th:field="*{fechacontrato}" class="form-control" required />
+            <div th:if="${#fields.hasErrors('fechacontrato')}" th:errors="*{fechacontrato}" class="text-danger"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Teléfono</label>
+            <input type="text" th:field="*{telefono}" class="form-control" required />
+            <div th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}" class="text-danger"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" th:field="*{email}" class="form-control" required />
+            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Género</label>
+            <select class="form-control" th:field="*{genero}">
+                <option value="">-- Selecciona un género --</option>
+                <option value="Masculino">Masculino</option>
+                <option value="Femenino">Femenino</option>
+                <option value="Otro">Otro</option>
+            </select>
+            <div th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}" class="text-danger"></div>
+        </div>
+
+        <div class="text-end">
+            <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Guardar</button>
+            <a th:href="@{/emp/inicio}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>

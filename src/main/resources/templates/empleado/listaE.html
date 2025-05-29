@@ -1,0 +1,40 @@
+<!-- departamento/listaD.html -->
+<div th:fragment="contenido">
+    <h2 class="text-center">Empleados</h2>
+    <div class="text-end mb-3">
+        <a th:href="@{/emp/crear}" class="btn btn-primary"><i class="fas fa-plus"></i> Nuevo Empleado</a>
+    </div>
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark text-center">
+            <tr>
+                <th>ID</th>
+                <th>Nombre Completo</th>
+                <th>Puesto</th>
+                <th>Departamento</th>
+                <th>Email</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="emp : ${empleadoE}">
+                <td th:text="${emp.id}"></td>
+                <td th:text="${emp.nombrecompleto}"></td>
+                <td th:text="${emp.puesto != null} ? ${emp.puesto.nombrepuesto} : 'Sin Puesto'"></td>
+                <td th:text="${emp.departamento != null} ? ${emp.departamento.nombre_dep} : 'Sin Departamento'"></td>
+                <td th:text="${emp.email}"></td>
+                <td class="text-center">
+				    <a th:href="@{/emp/ver/{id}(id=${emp.id})}" class="btn btn-info btn-sm me-1">
+				        <i class="fas fa-eye"></i>
+				    </a>
+				    <a th:href="@{/emp/editar/{id}(id=${emp.id})}" class="btn btn-warning btn-sm me-1">
+				        <i class="fas fa-edit"></i>
+				    </a>
+				    <a th:href="@{/emp/eliminar/{id}(id=${emp.id})}" class="btn btn-danger btn-sm"
+				       onclick="return confirm('¿Seguro?')">
+				        <i class="fas fa-trash"></i>
+				    </a>
+				</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
